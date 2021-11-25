@@ -1,11 +1,13 @@
-import { PrismaClient } from "@prisma/client";
+import { prisma } from "..";
 
-const prisma = new PrismaClient()
-
-module.exports = {
+export default {
   Query: {
     users: async () => await prisma.user.findMany(),
-    user: async (_: any, id: any) => await prisma.user.findUnique({ where: id }),
+    user: async (_: any, { ...id }) => {
+
+      return await prisma.user.findUnique({ where: id })
+
+    },
   },
 
   Mutation: {
