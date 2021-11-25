@@ -9,4 +9,4 @@ Essa aplicação foi criada para consolidar meus estudos sobre o desenvolvimento
 - Javascript
 - Nodejs
 - GraphQL
-- Sequelize
+- Prisma
