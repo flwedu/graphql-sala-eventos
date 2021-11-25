@@ -3,11 +3,6 @@ import { prisma } from "..";
 export default {
   Query: {
     users: async () => await prisma.user.findMany(),
-    user: async (_: any, { ...id }) => {
-
-      return await prisma.user.findUnique({ where: id })
-
-    },
   },
 
   Mutation: {
