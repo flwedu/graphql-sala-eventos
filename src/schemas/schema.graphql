@@ -1,5 +1,5 @@
 type User {
-  id: ID!
+  id: Int!
   name: String!
   email: String!
   createdAt: String
@@ -9,7 +9,7 @@ type User {
 }
 
 type Room {
-  id: ID!
+  id: Int!
   name: String!
   localization: String
   createdAt: String
@@ -18,7 +18,7 @@ type Room {
 }
 
 type RoomEvent {
-  id: ID!
+  id: Int!
   name: String!
   description: String
   minimumAge: Int
@@ -32,7 +32,7 @@ type RoomEvent {
 }
 
 type RoomEventPresence {
-  id: ID!
+  id: Int!
   createdAt: String
   user: User!
   event: RoomEvent!
@@ -40,7 +40,7 @@ type RoomEventPresence {
 
 type Query {
   users: [User!]!
-  user(id: ID!): User
+  user(id: Int!): User
 
   rooms: [Room!]!
 
