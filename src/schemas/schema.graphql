@@ -2,11 +2,51 @@ type User {
   id: ID!
   name: String!
   email: String!
+  createdAt: String
+  createdRooms: [Room]!
+  createdEvents: [RoomEvent]!
+  roomEventPresences: [RoomEventPresence]!
+}
+
+type Room {
+  id: ID!
+  name: String!
+  localization: String
+  createdAt: String
+  createdBy: User!
+  events: [RoomEvent]!
+}
+
+type RoomEvent {
+  id: ID!
+  name: String!
+  description: String
+  minimumAge: Int
+  startingTime: String
+  endingTime: String
+  createdAt: String
+  modifiedAt: String
+  room: Room!
+  createdBy: User!
+  roomEventPresences: [RoomEventPresence]!
+}
+
+type RoomEventPresence {
+  id: ID!
+  createdAt: String
+  user: User!
+  event: RoomEvent!
 }
 
 type Query {
   users: [User!]!
   user(id: ID!): User
+
+  rooms: [Room!]!
+
+  roomEvents: [RoomEvent!]!
+
+  presences: [RoomEventPresence!]!
 }
 
 type Mutation {
