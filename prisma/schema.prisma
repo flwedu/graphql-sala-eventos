@@ -1,0 +1,53 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DEV_URL")
+}
+
+model User {
+  id    Int    @id @default(autoincrement())
+  name  String @db.VarChar(255)
+  email String @db.VarChar(255)
+  createdAt DateTime @default(now()) @db.Timestamp(6)
+  createdRooms Room[]
+  createdEvents RoomEvent[]
+  roomEventPresences RoomEventPresence[]
+}
+
+model Room {
+  id    Int    @id @default(autoincrement())
+  name  String @db.VarChar(255)
+  localization String @db.VarChar(255)
+  createdAt DateTime @default(now()) @db.Timestamp(6)
+  userId Int
+  createdBy User @relation(fields: [userId], references: [id])
+  events RoomEvent[]
+}
+
+model RoomEvent {
+  id Int @id @default(autoincrement())
+  name String @db.VarChar(255)
+  description String? @db.VarChar(500)
+  minimumAge Int
+  startingTime DateTime @db.Time()
+  endingTime DateTime @db.Time()
+  createdAt DateTime @default(now()) @db.Timestamp(6)
+  modifiedAt DateTime @default(now()) @db.Timestamp(6)
+  roomId Int
+  room Room @relation(fields: [roomId], references: [id])
+  userId Int
+  createdBy User @relation(fields: [userId], references: [id])
+  roomEventPresences RoomEventPresence[]
+}
+
+model RoomEventPresence {
+  id Int @id @default(autoincrement())
+  createdAt DateTime @default(now()) @db.Timestamp(6)
+  userId Int
+  user User @relation(fields: [userId], references: [id])
+  roomEventId Int
+  event RoomEvent @relation(fields: [roomEventId], references: [id])
+}
