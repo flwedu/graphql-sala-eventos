@@ -25,12 +25,12 @@ module.exports = {
       creator_user_id: {
         allowNull: false,
         type: Sequelize.DATE,
-        references: { model: "User", key: "id" },
+        references: { model: "Users", key: "id" },
       },
       room_events: {
         allowNull: false,
         type: Sequelize.DATE,
-        references: { model: "RoomEvent", key: "id" },
+        references: { model: "RoomEvents", key: "id" },
       },
     });
   },

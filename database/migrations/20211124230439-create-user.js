@@ -28,12 +28,12 @@ module.exports = {
       events: {
         allowNull: true,
         type: Sequelize.INTEGER,
-        references: { model: "RoomEvent", key: "id" },
+        references: { model: "RoomEvents", key: "id" },
       },
       created_rooms: {
         allowNull: true,
         type: Sequelize.INTEGER,
-        references: { model: "Room", key: "id" },
+        references: { model: "Rooms", key: "id" },
       },
     });
   },

@@ -34,17 +34,17 @@ module.exports = {
       room_id: {
         allowNull: false,
         type: Sequelize.INTEGER,
-        references: { model: "Room", key: "id" },
+        references: { model: "Rooms", key: "id" },
       },
       creator_user_id: {
         allowNull: false,
         type: Sequelize.INTEGER,
-        references: { model: "User", key: "id" },
+        references: { model: "Users", key: "id" },
       },
       users_id: {
         allowNull: true,
         type: Sequelize.INTEGER,
-        references: { model: "User", key: "id" },
+        references: { model: "Users", key: "id" },
       },
     });
   },
