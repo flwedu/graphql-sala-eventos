@@ -1,12 +1,66 @@
-# graphql-sala-eventos
+# Descrição do projeto 💁‍♂️
 
-Uma aplicação para criação de salas de eventos, eventos, e confirmação de presença de usuários.
+Uma aplicação para visualização e criação de salas de eventos, eventos, e confirmação de presença de usuários.
 
-## Objetivos
+Criada para consolidar meus estudos sobre o desenvolvimento de APIs utilizando:
 
-Essa aplicação foi criada para consolidar meus estudos sobre o desenvolvimento de APIs utilizando:
-
-- Javascript
+- Typescript
 - Nodejs
 - GraphQL
 - Prisma
+
+# Preparando o ambiente 🔨
+
+## Instalando dependências do projeto
+
+```bash
+yarn install
+```
+
+## Conectando a um banco de dados
+
+### Configurando as variáveis de ambiente
+
+Para que o Prisma se conecte à uma database é necessário que seja configurada uma URL.
+O nome dessa URL deve está no arquivo `prisma/schema.prisma`:
+
+```json
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+```
+
+Já a URL deve ser configurada como uma variável de ambiente, dentro do arquivo `.env` localizado na pasta raiz:
+
+```json
+// Para Postgres:
+DATABASE_URL="postgresql://USER:PASSWORD@HOST:PORT/DATABASE?schema=SCHEMA"
+
+// Para Mysql:
+DATABASE_URL="mysql://USER:PASSWORD@HOST:PORT/SCHEMA"
+```
+
+### Rodando migrations
+
+Para rodar as migrations e sincronizar o banco de dados em um ambiente de desenvolvimento é utilizado o comando:
+
+```bash
+yarn prisma migrate dev
+```
+
+enquanto que, para ambientes de teste ou produção:
+
+```bash
+yarn prisma migrate deploy
+```
+
+Fonte: [Prisma Migrations](https://www.prisma.io/docs/concepts/components/prisma-migrate)
+
+## Iniciando a aplicação 🪄
+
+Execute o script de desenvolvimento utilizando:
+
+```bash
+yarn dev
+```
