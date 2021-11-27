@@ -32,6 +32,12 @@ type RoomEvent {
   roomEventPresences: [RoomEventPresence]!
 }
 
+enum Acess {
+  PUBLIC
+  ONLYINVITED
+  OLNYACCEPTED
+}
+
 type RoomEventPresence {
   id: Int!
   createdAt: String
