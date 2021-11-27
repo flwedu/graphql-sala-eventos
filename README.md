@@ -24,7 +24,7 @@ yarn install
 Para que o Prisma se conecte à uma database é necessário que seja configurada uma URL.
 O nome dessa URL deve está no arquivo `prisma/schema.prisma`:
 
-```json
+```javascript
 datasource db {
   provider = "postgresql"
   url      = env("DATABASE_URL")
@@ -33,12 +33,12 @@ datasource db {
 
 Já a URL deve ser configurada como uma variável de ambiente, dentro do arquivo `.env` localizado na pasta raiz:
 
-```json
+```javascript
 // Para Postgres:
-DATABASE_URL="postgresql://USER:PASSWORD@HOST:PORT/DATABASE?schema=SCHEMA"
+DATABASE_URL = "postgresql://USER:PASSWORD@HOST:PORT/DATABASE?schema=SCHEMA";
 
 // Para Mysql:
-DATABASE_URL="mysql://USER:PASSWORD@HOST:PORT/SCHEMA"
+DATABASE_URL = "mysql://USER:PASSWORD@HOST:PORT/SCHEMA";
 ```
 
 ### Rodando migrations
