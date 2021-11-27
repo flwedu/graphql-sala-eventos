@@ -36,6 +36,7 @@ model RoomEvent {
   endingTime DateTime @db.Time()
   createdAt DateTime @default(now()) @db.Timestamp(6)
   modifiedAt DateTime @default(now()) @db.Timestamp(6)
+  acess Acess @default(PUBLIC)
   roomId Int
   room Room @relation(fields: [roomId], references: [id])
   userId Int
@@ -50,4 +51,10 @@ model RoomEventPresence {
   user User @relation(fields: [userId], references: [id])
   roomEventId Int
   event RoomEvent @relation(fields: [roomEventId], references: [id])
+}
+
+enum Acess {
+  PUBLIC
+  ONLYINVITED
+  ONLYACCEPTED
 }
