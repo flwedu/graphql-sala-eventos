@@ -26,6 +26,7 @@ type RoomEvent {
   endingTime: String
   createdAt: String
   modifiedAt: String
+  acess: Acess
   room: Room!
   createdBy: User!
   roomEventPresences: [RoomEventPresence]!
@@ -43,10 +44,13 @@ type Query {
   user(id: Int!): User
 
   rooms: [Room!]!
+  room(id: Int!): Room
 
   roomEvents: [RoomEvent!]!
+  roomEvent(id: Int!): RoomEvent
 
   presences: [RoomEventPresence!]!
+  presence(id: Int!): RoomEventPresence
 }
 
 type Mutation {
