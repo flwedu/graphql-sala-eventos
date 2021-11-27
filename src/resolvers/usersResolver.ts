@@ -4,10 +4,12 @@ import UserService from "../service/userService";
 export default {
   Query: {
     users: async () => await UserService.listAll({}),
-    user: async (_: any, id: number) => await UserService.findById(id)
+    //@ts-ignore
+    user: async (_, { id }) => await UserService.findById(id)
   },
 
   Mutation: {
-    createUser: async (_: any, userData: User) => await UserService.create(userData),
+    //@ts-ignore
+    createUser: async (_, userData: User) => await UserService.create(userData),
   },
 };
