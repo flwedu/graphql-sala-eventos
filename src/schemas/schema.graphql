@@ -58,7 +58,7 @@ type Query {
   roomEventById(id: Int!): RoomEvent
   roomEventsByAge(age: Int!): [RoomEvent]!
 
-  presencesFromRoomEvent(roomEventId: Int!): [RoomEventPresence!]!
+  presencesFromRoomEvent(roomEventId: Int!): [RoomEventPresence]!
   presencesFromUser(userId: Int!): [RoomEventPresence]!
 }
 
