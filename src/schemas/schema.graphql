@@ -49,14 +49,17 @@ type Query {
   users: [User!]!
   user(id: Int!): User
 
-  rooms: [Room!]!
-  room(id: Int!): Room
+  roomsFromUser(userId: Int!): [Room]!
+  roomById(id: Int!): Room!
 
-  roomEvents: [RoomEvent!]!
-  roomEvent(id: Int!): RoomEvent
+  roomEventsFromUser(userId: Int!): [RoomEvent]!
+  roomEventsFromRoom(roomId: Int!): [RoomEvent]!
+  roomEventsPublics: [RoomEvent!]!
+  roomEventById(id: Int!): RoomEvent
+  roomEventsByAge(age: Int!): [RoomEvent]!
 
-  presences: [RoomEventPresence!]!
-  presence(id: Int!): RoomEventPresence
+  presencesFromRoomEvent(roomEventId: Int!): [RoomEventPresence!]!
+  presencesFromUser(userId: Int!): [RoomEventPresence]!
 }
 
 type Mutation {
