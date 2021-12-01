@@ -13,6 +13,11 @@ type User {
   roomEventPresences: [RoomEventPresence]!
 }
 
+input UserInput {
+  name: String
+  email: String
+}
+
 type Room {
   id: Int!
   name: String!
@@ -51,7 +56,7 @@ type RoomEventPresence {
 }
 
 type Query {
-  users: [User!]!
+  users(take: Int!): [User!]!
   user(id: Int!): User
 
   roomsFromUser(userId: Int!): [Room]!
@@ -68,7 +73,7 @@ type Query {
 }
 
 type Mutation {
-  createUser(name: String!, email: String!): User
+  createUser(user: UserInput): User
 }
 
 `
