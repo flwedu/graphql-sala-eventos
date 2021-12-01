@@ -18,6 +18,6 @@ export default {
 
     Mutation: {
         //@ts-ignore
-        createUser: async (_, userData: User) => await UserService.create(userData),
+
     },
 };
