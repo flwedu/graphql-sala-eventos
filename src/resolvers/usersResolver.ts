@@ -1,15 +1,27 @@
-import { User } from "@prisma/client";
-import UserService from "../service/userService";
+import { Prisma, User } from "@prisma/client";
+import { prisma } from "..";
 
 export default {
   Query: {
-    users: async () => await UserService.listAll({}),
     //@ts-ignore
-    user: async (_, { id }) => await UserService.findById(id)
+    users: async (_, { take }) => await prisma.user.findMany({
+      take: take,
+      orderBy: {
+        id: Prisma.SortOrder.asc
+      }
+    }),
+    //@ts-ignore
+    user: async (_, { id }) => await prisma.user.findFirst({
+      where: {
+        id: {
+          equals: id
+        }
+      }
+    })
   },
 
   Mutation: {
     //@ts-ignore
-    createUser: async (_, userData: User) => await UserService.create(userData),
+    createUser: async (_, { user }) => await prisma.user.create({ data: { ...user } })
   },
 };
