@@ -1,11 +1,13 @@
 import { gql } from "apollo-server";
 
 export default gql`
+scalar DateTime
+
 type User {
   id: Int!
   name: String!
   email: String!
-  createdAt: String
+  createdAt: DateTime
   createdRooms: [Room]!
   createdEvents: [RoomEvent]!
   roomEventPresences: [RoomEventPresence]!
@@ -15,7 +17,7 @@ type Room {
   id: Int!
   name: String!
   localization: String
-  createdAt: String
+  createdAt: DateTime
   createdBy: User!
   events: [RoomEvent]!
 }
@@ -25,10 +27,10 @@ type RoomEvent {
   name: String!
   description: String
   minimumAge: Int
-  startingTime: String
-  endingTime: String
-  createdAt: String
-  modifiedAt: String
+  startingTime: DateTime
+  endingTime: DateTime
+  createdAt: DateTime
+  modifiedAt: DateTime
   acess: Acess
   room: Room!
   createdBy: User!
@@ -43,7 +45,7 @@ enum Acess {
 
 type RoomEventPresence {
   id: Int!
-  createdAt: String
+  createdAt: DateTime
   user: User!
   event: RoomEvent!
 }
