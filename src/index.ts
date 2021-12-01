@@ -1,16 +1,19 @@
 import { PrismaClient } from "@prisma/client";
-import { GraphQLServer } from "graphql-yoga";
 import path from "path";
+import { ApolloServer } from "apollo-server";
 import roomEventPresenceResolver from "./resolvers/roomEventPresenceResolver";
 import roomEventsResolver from "./resolvers/roomEventsResolver";
 import roomResolver from "./resolvers/roomResolver";
 import usersResolver from "./resolvers/usersResolver";
+import schema from "./schemas/schema";
 
 export const prisma = new PrismaClient();
 
-const server = new GraphQLServer({
-  typeDefs: path.resolve(__dirname, "schemas/schema.graphql"),
+const server = new ApolloServer({
+  typeDefs: schema,
   resolvers: [usersResolver, roomResolver, roomEventsResolver, roomEventPresenceResolver],
 });
 
-server.start(() => console.log("server is running on localhost:4000"));
+server.listen().then(({ url }) => {
+  console.log(`Server is running at ${url}`)
+})

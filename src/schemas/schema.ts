@@ -1,3 +1,6 @@
+import { gql } from "apollo-server";
+
+export default gql`
 type User {
   id: Int!
   name: String!
@@ -65,3 +68,5 @@ type Query {
 type Mutation {
   createUser(name: String!, email: String!): User
 }
+
+`
