@@ -27,6 +27,12 @@ type Room {
   events: [RoomEvent]!
 }
 
+input RoomInput{
+  name: String
+  localization: String
+  createdByUserId: Int
+}
+
 type RoomEvent {
   id: Int!
   name: String!
@@ -74,6 +80,7 @@ type Query {
 
 type Mutation {
   createUser(user: UserInput): User
+  createRoom(room: RoomInput): Room
 }
 
 `
