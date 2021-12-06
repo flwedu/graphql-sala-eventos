@@ -8,8 +8,8 @@ type User {
   name: String!
   email: String!
   createdAt: DateTime
-  createdRooms: [Room!]!
-  createdEvents: [RoomEvent!]!
+  rooms: [Room!]!
+  roomEvents: [RoomEvent!]!
   roomEventPresences: [RoomEventPresence!]!
 }
 
@@ -24,7 +24,7 @@ type Room {
   localization: String
   createdAt: DateTime
   createdBy: User!
-  events: [RoomEvent!]!
+  roomEvents: [RoomEvent!]!
 }
 
 input RoomInput{
@@ -42,9 +42,9 @@ type RoomEvent {
   endingTime: DateTime
   createdAt: DateTime
   modifiedAt: DateTime
-  acess: Acess
+  acess: Acess!
   room: Room!
-  createdBy: User!
+  user: User!
   roomEventPresences: [RoomEventPresence]!
 }
 
@@ -58,7 +58,7 @@ type RoomEventPresence {
   id: Int!
   createdAt: DateTime
   user: User!
-  event: RoomEvent!
+  roomEvent: RoomEvent!
 }
 
 type Query {

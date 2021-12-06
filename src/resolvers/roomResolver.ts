@@ -30,7 +30,7 @@ export default {
                 }
             }),
         //@ts-ignore
-        events: async (obj, args, context, info) => {
+        roomEvents: async (obj, args, context, info) => {
             await prisma.roomEvent.findMany({
                 where: {
                     roomId: obj.id

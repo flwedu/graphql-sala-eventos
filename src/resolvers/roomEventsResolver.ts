@@ -31,7 +31,7 @@ export default {
         }),
 
         //@ts-ignore
-        createdBy: async (obj, args, context, info) => await prisma.user.findFirst({
+        user: async (obj, args, context, info) => await prisma.user.findFirst({
             where: {
                 id: obj.userId
             }

@@ -27,7 +27,7 @@ export default {
 
   User: {
     //@ts-ignore
-    createdRooms: async (obj, args, context, info) => {
+    rooms: async (obj, args, context, info) => {
       return await prisma.room.findMany({
         where: {
           userId: obj.id
@@ -35,7 +35,7 @@ export default {
       })
     },
     //@ts-ignore
-    createdEvents: async (obj, args, context, info) => prisma.roomEvent.findMany({
+    roomEvents: async (obj, args, context, info) => prisma.roomEvent.findMany({
       where: {
         userId: obj.id
       }

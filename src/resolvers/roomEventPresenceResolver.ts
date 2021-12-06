@@ -21,7 +21,7 @@ export default {
             }
         }),
         //@ts-ignore
-        event: async (obj, args, context, info) => await prisma.roomEvent.findFirst({
+        roomEvent: async (obj, args, context, info) => await prisma.roomEvent.findFirst({
             where: {
                 id: obj.roomEventId
             }
