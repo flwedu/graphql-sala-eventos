@@ -4,21 +4,23 @@ import { prisma } from "..";
 export default {
     Query: {
         //@ts-ignore
-        roomsFromUser: async (_, { userId }) => await prisma.room.findMany({
-            where: {
-                userId: userId
-            }
-        }),
+        rooms: async (obj, args, context, info) => {
+            await prisma.room.findMany({
+                take: args.take
+            })
+        },
+
         //@ts-ignore
-        roomById: async (_, { id }) => await prisma.room.findFirst({
+        room: async (obj, args, context, info) => await prisma.room.findFirst({
             where: {
-                id: id
+                id: args.id
             }
         })
     },
 
     Mutation: {
         //@ts-ignore
+<<<<<<< HEAD
         createRoom: async (_, { room }) => {
             const { createdByUserId, ...roomsProps } = room
             const createdRoom = await prisma.room.create({
@@ -26,5 +28,25 @@ export default {
             })
             return createdRoom
         }
+=======
+>>>>>>> a307cc19980cf5b996d0fcbfcb2f26b4fd6f860e
     },
+
+    Room: {
+        //@ts-ignore
+        createdBy: async (obj, args, context, info) =>
+            await prisma.user.findFirst({
+                where: {
+                    id: obj.userId
+                }
+            }),
+        //@ts-ignore
+        events: async (obj, args, context, info) => {
+            await prisma.roomEvent.findMany({
+                where: {
+                    roomId: obj.id
+                }
+            })
+        },
+    }
 };

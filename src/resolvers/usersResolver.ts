@@ -4,24 +4,47 @@ import { prisma } from "..";
 export default {
   Query: {
     //@ts-ignore
-    users: async (_, { take }) => await prisma.user.findMany({
-      take: take,
+    users: async (obj, args, context, info) => await prisma.user.findMany({
+      take: args.take,
       orderBy: {
         id: Prisma.SortOrder.asc
       }
     }),
     //@ts-ignore
-    user: async (_, { id }) => await prisma.user.findFirst({
+    user: async (obj, args, context, info) => await prisma.user.findFirst({
       where: {
         id: {
-          equals: id
+          equals: args.id
         }
       }
-    })
+    }),
   },
 
   Mutation: {
     //@ts-ignore
-    createUser: async (_, { user }) => await prisma.user.create({ data: { ...user } })
+    createUser: async (obj, args, context, info) => await prisma.user.create({ data: { ...args.user } })
   },
+
+  User: {
+    //@ts-ignore
+    createdRooms: async (obj, args, context, info) => {
+      return await prisma.room.findMany({
+        where: {
+          userId: obj.id
+        }
+      })
+    },
+    //@ts-ignore
+    createdEvents: async (obj, args, context, info) => prisma.roomEvent.findMany({
+      where: {
+        userId: obj.id
+      }
+    }),
+    //@ts-ignore
+    roomEventPresences: async (obj, args, context, info) => prisma.roomEventPresence.findMany({
+      where: {
+        userId: obj.id
+      }
+    })
+  }
 };

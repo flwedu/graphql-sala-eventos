@@ -8,9 +8,9 @@ type User {
   name: String!
   email: String!
   createdAt: DateTime
-  createdRooms: [Room]!
-  createdEvents: [RoomEvent]!
-  roomEventPresences: [RoomEventPresence]!
+  createdRooms: [Room!]!
+  createdEvents: [RoomEvent!]!
+  roomEventPresences: [RoomEventPresence!]!
 }
 
 input UserInput {
@@ -65,17 +65,13 @@ type Query {
   users(take: Int!): [User!]!
   user(id: Int!): User
 
-  roomsFromUser(userId: Int!): [Room]!
-  roomById(id: Int!): Room!
+  rooms(take: Int!): [Room]!
+  room(id: Int!): Room
 
-  roomEventsFromUser(userId: Int!): [RoomEvent]!
-  roomEventsFromRoom(roomId: Int!): [RoomEvent]!
-  roomEventsPublics: [RoomEvent!]!
-  roomEventById(id: Int!): RoomEvent
+  roomEvent(id: Int!): RoomEvent
   roomEventsByAge(age: Int!): [RoomEvent]!
 
-  presencesFromRoomEvent(roomEventId: Int!): [RoomEventPresence]!
-  presencesFromUser(userId: Int!): [RoomEventPresence]!
+  roomEventPresence(id: Int!): RoomEventPresence
 }
 
 type Mutation {

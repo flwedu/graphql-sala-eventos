@@ -1,17 +1,16 @@
 import { PrismaClient } from "@prisma/client";
 import { ApolloServer } from "apollo-server";
-import dateTimeResolver from "./resolvers/dateTimeResolver";
-import roomEventPresenceResolver from "./resolvers/roomEventPresenceResolver";
-import roomEventsResolver from "./resolvers/roomEventsResolver";
-import roomResolver from "./resolvers/roomResolver";
-import usersResolver from "./resolvers/usersResolver";
+import { dateTimeResolver, roomEventPresenceResolver, roomEventsResolver, roomResolver, usersResolver } from "./resolvers"
 import schema from "./schemas/schema";
 
 export const prisma = new PrismaClient();
 
+const typeDefs = [schema];
+const resolvers = [dateTimeResolver, usersResolver, roomResolver, roomEventsResolver, roomEventPresenceResolver];
+
 const server = new ApolloServer({
-  typeDefs: schema,
-  resolvers: [dateTimeResolver, usersResolver, roomResolver, roomEventsResolver, roomEventPresenceResolver],
+  typeDefs,
+  resolvers
 });
 
 server.listen().then(({ url }) => {

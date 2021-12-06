@@ -2,21 +2,29 @@ import { prisma } from "..";
 
 export default {
     Query: {
-
         //@ts-ignore
-        presencesFromRoomEvent: async (_, { roomEventId }) => prisma.roomEventPresence.findMany({
+        roomEventPresence: async (obj, args, context, info) => await prisma.roomEventPresence.findFirst({
             where: {
-                roomEventId: roomEventId
-            }
-        }),
-        //@ts-ignore
-        presencesFromUser: async (_, { userId }) => prisma.roomEventPresence.findMany({
-            where: {
-                userId: userId
+                id: args.id
             }
         })
     },
     Mutation: {
 
+    },
+
+    RoomEventPresence: {
+        //@ts-ignore
+        user: async (obj, args, context, info) => await prisma.user.findFirst({
+            where: {
+                id: obj.userId
+            }
+        }),
+        //@ts-ignore
+        event: async (obj, args, context, info) => await prisma.roomEvent.findFirst({
+            where: {
+                id: obj.roomEventId
+            }
+        })
     }
 }
