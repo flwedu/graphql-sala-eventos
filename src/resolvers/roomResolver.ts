@@ -1,14 +1,13 @@
-import { Room } from "@prisma/client";
 import { prisma } from "..";
 
 export default {
     Query: {
         //@ts-ignore
-        rooms: async (obj, args, context, info) => {
+        rooms: async (obj, args, context, info) =>
             await prisma.room.findMany({
                 take: args.take
             })
-        },
+        ,
 
         //@ts-ignore
         room: async (obj, args, context, info) => await prisma.room.findFirst({
