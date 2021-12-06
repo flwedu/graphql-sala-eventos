@@ -20,16 +20,6 @@ export default {
 
     Mutation: {
         //@ts-ignore
-<<<<<<< HEAD
-        createRoom: async (_, { room }) => {
-            const { createdByUserId, ...roomsProps } = room
-            const createdRoom = await prisma.room.create({
-                data: { ...roomsProps, userId: Number(createdByUserId) } as Room
-            })
-            return createdRoom
-        }
-=======
->>>>>>> a307cc19980cf5b996d0fcbfcb2f26b4fd6f860e
     },
 
     Room: {
