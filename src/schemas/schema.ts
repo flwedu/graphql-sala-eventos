@@ -24,7 +24,7 @@ type Room {
   localization: String
   createdAt: DateTime
   createdBy: User!
-  events: [RoomEvent]!
+  events: [RoomEvent!]!
 }
 
 input RoomInput{
@@ -65,11 +65,11 @@ type Query {
   users(take: Int!): [User!]!
   user(id: Int!): User
 
-  rooms(take: Int!): [Room]!
+  rooms(take: Int!): [Room!]!
   room(id: Int!): Room
 
   roomEvent(id: Int!): RoomEvent
-  roomEventsByAge(age: Int!): [RoomEvent]!
+  roomEventsByAge(age: Int!): [RoomEvent!]!
 
   roomEventPresence(id: Int!): RoomEventPresence
 }
