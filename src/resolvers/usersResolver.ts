@@ -14,7 +14,7 @@ export default {
     user: async (obj, args, context, info) => await prisma.user.findFirst({
       where: {
         id: {
-          equals: args.id
+          equals: Number(args.id)
         }
       }
     }),
@@ -30,20 +30,20 @@ export default {
     rooms: async (obj, args, context, info) => {
       return await prisma.room.findMany({
         where: {
-          userId: obj.id
+          userId: Number(obj.id)
         }
       })
     },
     //@ts-ignore
     roomEvents: async (obj, args, context, info) => prisma.roomEvent.findMany({
       where: {
-        userId: obj.id
+        userId: Number(obj.id)
       }
     }),
     //@ts-ignore
     roomEventPresences: async (obj, args, context, info) => prisma.roomEventPresence.findMany({
       where: {
-        userId: obj.id
+        userId: Number(obj.id)
       }
     })
   }

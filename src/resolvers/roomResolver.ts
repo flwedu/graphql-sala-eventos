@@ -12,7 +12,7 @@ export default {
         //@ts-ignore
         room: async (obj, args, context, info) => await prisma.room.findFirst({
             where: {
-                id: args.id
+                id: Number(args.id)
             }
         })
     },
@@ -26,14 +26,14 @@ export default {
         createdBy: async (obj, args, context, info) =>
             await prisma.user.findFirst({
                 where: {
-                    id: obj.userId
+                    id: Number(obj.userId)
                 }
             }),
         //@ts-ignore
         roomEvents: async (obj, args, context, info) => {
             await prisma.roomEvent.findMany({
                 where: {
-                    roomId: obj.id
+                    roomId: Number(obj.id)
                 }
             })
         },

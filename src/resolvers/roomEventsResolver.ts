@@ -5,7 +5,7 @@ export default {
         //@ts-ignore
         roomEvent: async (obj, args, context, info) => await prisma.roomEvent.findFirst({
             where: {
-                id: args.id
+                id: Number(args.id)
             }
         }),
         //@ts-ignore
@@ -26,21 +26,21 @@ export default {
         //@ts-ignore
         room: async (obj, args, context, info) => await prisma.room.findFirst({
             where: {
-                id: obj.roomId
+                id: Number(obj.roomId)
             }
         }),
 
         //@ts-ignore
         user: async (obj, args, context, info) => await prisma.user.findFirst({
             where: {
-                id: obj.userId
+                id: Number(obj.userId)
             }
         }),
 
         //@ts-ignore
         roomEventPresences: async (obj, args, context, info) => await prisma.roomEventPresence.findMany({
             where: {
-                roomEventId: obj.id
+                roomEventId: Number(obj.id)
             }
         })
     }

@@ -17,13 +17,13 @@ export default {
         //@ts-ignore
         user: async (obj, args, context, info) => await prisma.user.findFirst({
             where: {
-                id: obj.userId
+                id: Number(obj.userId)
             }
         }),
         //@ts-ignore
         roomEvent: async (obj, args, context, info) => await prisma.roomEvent.findFirst({
             where: {
-                id: obj.roomEventId
+                id: Number(obj.roomEventId)
             }
         })
     }

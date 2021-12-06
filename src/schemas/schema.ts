@@ -4,7 +4,7 @@ export default gql`
 scalar DateTime
 
 type User {
-  id: Int!
+  id: ID!
   name: String!
   email: String!
   createdAt: DateTime
@@ -19,7 +19,7 @@ input UserInput {
 }
 
 type Room {
-  id: Int!
+  id: ID!
   name: String!
   localization: String
   createdAt: DateTime
@@ -30,11 +30,11 @@ type Room {
 input RoomInput{
   name: String
   localization: String
-  createdByUserId: Int
+  userId: ID
 }
 
 type RoomEvent {
-  id: Int!
+  id: ID!
   name: String!
   description: String
   minimumAge: Int
@@ -55,7 +55,7 @@ enum Acess {
 }
 
 type RoomEventPresence {
-  id: Int!
+  id: ID!
   createdAt: DateTime
   user: User!
   roomEvent: RoomEvent!
@@ -63,15 +63,15 @@ type RoomEventPresence {
 
 type Query {
   users(take: Int!): [User!]!
-  user(id: Int!): User
+  user(id: ID!): User
 
   rooms(take: Int!): [Room!]!
-  room(id: Int!): Room
+  room(id: ID!): Room
 
-  roomEvent(id: Int!): RoomEvent
+  roomEvent(id: ID!): RoomEvent
   roomEventsByAge(age: Int!): [RoomEvent!]!
 
-  roomEventPresence(id: Int!): RoomEventPresence
+  roomEventPresence(id: ID!): RoomEventPresence
 }
 
 type Mutation {
