@@ -17,11 +17,34 @@ export default {
           equals: args.id
         }
       }
-    })
+    }),
   },
 
   Mutation: {
     //@ts-ignore
     createUser: async (obj, args, context, info) => await prisma.user.create({ data: { ...args.user } })
   },
+
+  User: {
+    //@ts-ignore
+    createdRooms: async (obj, args, context, info) => {
+      return await prisma.room.findMany({
+        where: {
+          userId: obj.id
+        }
+      })
+    },
+    //@ts-ignore
+    createdEvents: async (obj, args, context, info) => prisma.roomEvent.findMany({
+      where: {
+        userId: obj.id
+      }
+    }),
+    //@ts-ignore
+    roomEventPresences: async (obj, args, context, info) => prisma.roomEventPresence.findMany({
+      where: {
+        userId: obj.id
+      }
+    })
+  }
 };

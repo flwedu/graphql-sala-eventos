@@ -3,42 +3,45 @@ import { prisma } from "..";
 export default {
     Query: {
         //@ts-ignore
-        roomEventsFromUser: async (_, { userId }) => prisma.roomEvent.findMany({
+        roomEvent: async (obj, args, context, info) => await prisma.roomEvent.findFirst({
             where: {
-                userId: userId
+                id: args.id
             }
         }),
         //@ts-ignore
-        roomEventsFromRoom: async (_, { roomId }) => prisma.roomEvent.findMany({
-            where: {
-                roomId: roomId
-            }
-        }),
-
-        roomEventsPublics: async () => prisma.roomEvent.findMany({
-            where: {
-                acess: "PUBLIC"
-            }
-        }),
-
-        //@ts-ignore
-        roomEventById: async (_, { roomEventId }) => prisma.roomEvent.findFirst({
-            where: {
-                id: roomEventId
-            }
-        }),
-        //@ts-ignore
-        roomEventsByAge: async (_, { age }) => prisma.roomEvent.findMany({
+        roomEventsByAge: async (obj, args, context, info) => await prisma.roomEvent.findMany({
             where: {
                 minimumAge: {
-                    gt: age
+                    gt: args.age
                 }
             }
         }),
-
     },
 
     Mutation: {
 
+    },
+
+    RoomEvent: {
+        //@ts-ignore
+        room: async (obj, args, context, info) => await prisma.room.findFirst({
+            where: {
+                id: obj.roomId
+            }
+        }),
+
+        //@ts-ignore
+        createdBy: async (obj, args, context, info) => await prisma.user.findFirst({
+            where: {
+                id: obj.userId
+            }
+        }),
+
+        //@ts-ignore
+        roomEventPresences: async (obj, args, context, info) => await prisma.roomEventPresence.findMany({
+            where: {
+                roomEventId: obj.id
+            }
+        })
     }
 }
