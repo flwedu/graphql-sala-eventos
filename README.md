@@ -43,17 +43,13 @@ DATABASE_URL = "mysql://USER:PASSWORD@HOST:PORT/SCHEMA";
 
 ### Rodando migrations
 
-Para rodar as migrations e sincronizar o banco de dados em um ambiente de desenvolvimento é utilizado o comando:
+Antes da primeira conexão com o banco de dados, é necessário se rodar uma migration inicial:
 
 ```bash
-yarn prisma migrate dev
+yarn prisma migrate dev --name init
 ```
 
-enquanto que, para ambientes de teste ou produção:
-
-```bash
-yarn prisma migrate deploy
-```
+Com esse comando, será criada uma migration inicial com o nome `init`.
 
 Fonte: [Prisma Migrations](https://www.prisma.io/docs/concepts/components/prisma-migrate)
 
