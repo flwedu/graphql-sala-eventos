@@ -1,1 +1,4 @@
 /node_modules
+README.md
+prisma/migrations/migration_lock.toml
+prisma/migrations/20211207233153_init/migration.sql
