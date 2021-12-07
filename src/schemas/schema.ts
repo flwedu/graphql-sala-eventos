@@ -23,7 +23,7 @@ type Room {
   name: String!
   localization: String
   createdAt: DateTime
-  createdBy: User!
+  user: User!
   roomEvents: [RoomEvent!]!
 }
 

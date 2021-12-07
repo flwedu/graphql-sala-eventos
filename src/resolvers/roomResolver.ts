@@ -23,19 +23,18 @@ export default {
 
     Room: {
         //@ts-ignore
-        createdBy: async (obj, args, context, info) =>
+        user: async (obj, args, context, info) =>
             await prisma.user.findFirst({
                 where: {
                     id: Number(obj.userId)
                 }
             }),
         //@ts-ignore
-        roomEvents: async (obj, args, context, info) => {
+        roomEvents: async (obj, args, context, info) =>
             await prisma.roomEvent.findMany({
                 where: {
                     roomId: Number(obj.id)
                 }
             })
-        },
-    }
+    },
 };
