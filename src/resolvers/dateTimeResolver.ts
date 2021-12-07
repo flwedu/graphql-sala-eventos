@@ -1,17 +1,11 @@
-import { GraphQLScalarType, Kind } from "graphql";
+import { GraphQLScalarType } from "graphql";
 
 export default {
     DateTime: new GraphQLScalarType({
         name: 'DateTime',
         description: 'Date and time custom scalar type',
-        serialize: (value: any) => value.getTime(),
+        serialize: (value: any) => value.toISOString(),
         parseValue: (value: any) => new Date(value),
-        parseLiteral: (obj: any) => {
-            if (obj.kind === Kind.INT) {
-                return new Date(parseInt(obj.value, 10))
-            }
-            return null
-        }
-
+        parseLiteral: (obj: any) => new Date(obj.value)
     })
 }
