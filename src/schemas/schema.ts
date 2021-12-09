@@ -30,7 +30,7 @@ type Room {
 input RoomInput{
   name: String
   localization: String
-  userId: ID
+  userId: Int
 }
 
 type RoomEvent {
@@ -46,6 +46,17 @@ type RoomEvent {
   room: Room!
   user: User!
   roomEventPresences: [RoomEventPresence]!
+}
+
+input RoomEventInput{
+  name: String
+  description: String
+  minimumAge: Int
+  startingTime: DateTime
+  endingTime: DateTime
+  acess: Acess
+  roomId: Int
+  userId: Int
 }
 
 enum Acess {
@@ -77,6 +88,7 @@ type Query {
 type Mutation {
   createUser(user: UserInput): User
   createRoom(room: RoomInput): Room
+  createRoomEvent(roomEvent: RoomEventInput): RoomEvent
 }
 
 `
