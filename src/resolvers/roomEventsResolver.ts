@@ -19,6 +19,34 @@ export default {
     },
 
     Mutation: {
+        //@ts-ignore
+        createRoomEvent: async (obj, args, context, info) => {
+
+            //Verifying if exists an event at the same time
+            const concurrentEvent = await prisma.roomEvent.findFirst({
+                where: {
+                    AND: [
+                        {
+                            startingTime: {
+
+                                gte: new Date(args.roomEvent.startingTime)
+                            }
+                        },
+                        {
+                            endingTime: {
+                                lte: new Date(args.roomEvent.endingTime)
+                            }
+                        }]
+                }
+            })
+
+            if (!concurrentEvent) return await prisma.roomEvent.create({
+                data: {
+                    ...args.roomEvent
+                }
+            })
+
+        }
 
     },
 
