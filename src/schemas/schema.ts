@@ -65,7 +65,7 @@ type Query {
   users(take: Int!): [User!]!
   user(id: ID!): User
 
-  rooms(take: Int!): [Room!]!
+  rooms(page:Int!, take: Int!): [Room!]!
   room(id: ID!): Room
 
   roomEvent(id: ID!): RoomEvent

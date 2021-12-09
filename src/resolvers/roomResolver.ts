@@ -5,6 +5,7 @@ export default {
         //@ts-ignore
         rooms: async (obj, args, context, info) =>
             await prisma.room.findMany({
+                skip: (args.take * args.page),
                 take: args.take
             })
         ,
@@ -19,6 +20,9 @@ export default {
 
     Mutation: {
         //@ts-ignore
+        createRoom: async (obj, args, context, info) => await prisma.room.create({
+            data: { ...args.room, userId: Number(args.room.userId) },
+        }),
     },
 
     Room: {
