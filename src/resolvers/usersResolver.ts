@@ -6,6 +6,7 @@ export default {
     //@ts-ignore
     users: async (obj, args, context, info) => await prisma.user.findMany({
       take: args.take,
+      skip: (args.page * args.take),
       orderBy: {
         id: Prisma.SortOrder.asc
       }

@@ -62,7 +62,7 @@ type RoomEventPresence {
 }
 
 type Query {
-  users(take: Int!): [User!]!
+  users(page:Int!, take: Int!): [User!]!
   user(id: ID!): User
 
   rooms(page:Int!, take: Int!): [Room!]!
