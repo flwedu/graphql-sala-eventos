@@ -1,3 +1,4 @@
+import { RoomEventPresence } from "@prisma/client";
 import { prisma } from "..";
 
 export default {
@@ -10,6 +11,18 @@ export default {
         })
     },
     Mutation: {
+
+        createRoomEventPresence: async (_parent: any, args: { roomEventPresence: RoomEventPresence }, _context: any, _info: any) => await prisma.roomEventPresence.create({
+            data: {
+                ...args.roomEventPresence
+            }
+        }),
+
+        deleteRoomEventPresence: async (_parent: any, args: { id: any }, _context: any, _info: any) => await prisma.roomEventPresence.delete({
+            where: {
+                id: args.id,
+            }
+        })
 
     },
 
