@@ -1,15 +1,15 @@
+import { RoomEvent } from "@prisma/client";
 import { prisma } from "..";
 
 export default {
     Query: {
-        //@ts-ignore
-        roomEvent: async (obj, args, context, info) => await prisma.roomEvent.findFirst({
+
+        roomEvent: async (_parent: any, args: { id: any; }, _context: any, _info: any) => await prisma.roomEvent.findFirst({
             where: {
                 id: Number(args.id)
             }
         }),
-        //@ts-ignore
-        roomEventsByAge: async (obj, args, context, info) => await prisma.roomEvent.findMany({
+        roomEventsByAge: async (_parent: any, args: { age: any; }, _context: any, _info: any) => await prisma.roomEvent.findMany({
             where: {
                 minimumAge: {
                     gt: args.age
@@ -19,8 +19,7 @@ export default {
     },
 
     Mutation: {
-        //@ts-ignore
-        createRoomEvent: async (obj, args, context, info) => {
+        createRoomEvent: async (_parent: any, args: { roomEvent: RoomEvent; }, _context: any, _info: any) => {
 
             //Verifying if exists an event at the same time
             const concurrentEvent = await prisma.roomEvent.findFirst({
@@ -51,24 +50,21 @@ export default {
     },
 
     RoomEvent: {
-        //@ts-ignore
-        room: async (obj, args, context, info) => await prisma.room.findFirst({
+        room: async (parent: { roomId: number; }, _args: any, _context: any, _info: any) => await prisma.room.findFirst({
             where: {
-                id: Number(obj.roomId)
+                id: Number(parent.roomId)
             }
         }),
 
-        //@ts-ignore
-        user: async (obj, args, context, info) => await prisma.user.findFirst({
+        user: async (parent: { userId: number; }, _args: any, _context: any, _info: any) => await prisma.user.findFirst({
             where: {
-                id: Number(obj.userId)
+                id: Number(parent.userId)
             }
         }),
 
-        //@ts-ignore
-        roomEventPresences: async (obj, args, context, info) => await prisma.roomEventPresence.findMany({
+        roomEventPresences: async (parent: { id: any; }, _args: any, _context: any, _info: any) => await prisma.roomEventPresence.findMany({
             where: {
-                roomEventId: Number(obj.id)
+                roomEventId: Number(parent.id)
             }
         })
     }
