@@ -22,20 +22,35 @@ export default {
         createRoomEvent: async (_parent: any, args: { roomEvent: RoomEvent; }, _context: any, _info: any) => {
 
             //Verifying if exists an event at the same time
-            const concurrentEvent = await prisma.roomEvent.findFirst({
+            const concurrentEvent = await prisma.roomEvent.findMany({
                 where: {
-                    AND: [
-                        {
-                            startingTime: {
-
-                                gte: new Date(args.roomEvent.startingTime)
-                            }
-                        },
-                        {
-                            endingTime: {
-                                lte: new Date(args.roomEvent.endingTime)
-                            }
-                        }]
+                    OR: [{
+                        AND: [
+                            {
+                                startingTime: {
+                                    lte: args.roomEvent.startingTime
+                                }
+                            },
+                            {
+                                endingTime: {
+                                    gte: args.roomEvent.startingTime
+                                }
+                            }]
+                    },
+                    {
+                        AND: [
+                            {
+                                endingTime: {
+                                    gte: args.roomEvent.endingTime
+                                }
+                            },
+                            {
+                                startingTime: {
+                                    lte: args.roomEvent.endingTime
+                                }
+                            }]
+                    }
+                    ]
                 }
             })
 
