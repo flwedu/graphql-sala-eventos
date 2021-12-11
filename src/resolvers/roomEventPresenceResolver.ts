@@ -11,17 +11,17 @@ export default {
     },
     Mutation: {
 
-        createRoomEventPresence: async (_parent: any, args: { roomEventPresence: RoomEventPresence }, _context: any, _info: any) => await prisma.roomEventPresence.create({
-            data: {
-                ...args.roomEventPresence
-            }
-        }),
+        // createRoomEventPresence: async (_parent: any, args: { roomEventPresence: RoomEventPresence }, _context: any, _info: any) => await prisma.roomEventPresence.create({
+        //     data: {
+        //         ...args.roomEventPresence
+        //     }
+        // }),
 
-        deleteRoomEventPresence: async (_parent: any, args: { id: number }, _context: any, _info: any) => await prisma.roomEventPresence.delete({
-            where: {
-                id: args.id,
-            }
-        })
+        // deleteRoomEventPresence: async (_parent: any, args: { id: number }, _context: any, _info: any) => await prisma.roomEventPresence.delete({
+        //     where: {
+        //         id: args.id,
+        //     }
+        // })
 
     },
 
